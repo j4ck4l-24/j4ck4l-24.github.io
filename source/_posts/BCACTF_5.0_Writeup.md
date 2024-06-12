@@ -4,8 +4,6 @@ date: 2024-06-12
 tags: 
 ---
 
-# BCACTF 5.0
-
 # Web/Sea Scavenger
 
 > **Description** : Take a tour of the deep sea! Explore the depths of webpage secrets and find the hidden treasure. Pro tip: Zoom out!. \
